@@ -1,0 +1,7 @@
+
+# Remove node modules generated files
+*node_modules/*
+*package-lock.json
+
+# Remove generated coverage folder
+*coverage/*

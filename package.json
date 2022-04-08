@@ -1,0 +1,53 @@
+{
+  "name": "dominatejs",
+  "version": "1.0.0",
+  "author": "Kyle Gundersen",
+  "description": "A simple DOM Helper that will change the way you feel about JavaScript frameworks forever.",
+  "main": "dist/index.js",
+  "scripts": {
+    "init": "npm install",
+    "audit-fix": "npm audit fix",
+    "build": "webpack",
+    "watch": "npx webpack - w",
+    "serve-example": "node example/server.js",
+    "test": "jest",
+    "test-watch": "jest --watch",
+    "test-coverage": "jest --coverage",
+    "publish-to-npm": "npm publish"
+  },
+  "devDependencies": {
+    "expose-loader": "^3.1.0",
+    "express": "^4.17.2",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.4",
+    "@types/jest": "^27.4.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.6.3",
+    "webpack": "^5.65.0",
+    "webpack-cli": "^4.9.1",
+    "opener": "^1.5.2"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kylegundersen/DOMinateJS.git"
+  },
+  "keywords": [
+    "DOM",
+    "helper",
+    "vanilla",
+    "TypeScript",
+    "UMD",
+    "AMD",
+    "simple",
+    "lightweight",
+    "minimal"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kylegundersen/DOMinateJS/issues"
+  },
+  "homepage": "https://github.com/kylegundersen/DOMinateJS#readme"
+}
