@@ -1,7 +1,7 @@
 {
-  "name": "dominatejs",
+  "name": "domination-js",
   "version": "1.0.0",
-  "author": "Kyle Gundersen",
+  "author": "kylegundersen",
   "description": "A simple DOM Helper that will change the way you feel about JavaScript frameworks forever.",
   "main": "dist/index.js",
   "scripts": {
@@ -32,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kylegundersen/DOMinateJS.git"
+    "url": "git+https://github.com/kylegundersen/DOMinationJS.git"
   },
   "keywords": [
     "DOM",
@@ -47,7 +47,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kylegundersen/DOMinateJS/issues"
+    "url": "https://github.com/kylegundersen/DOMinationJS/issues"
   },
-  "homepage": "https://github.com/kylegundersen/DOMinateJS#readme"
+  "homepage": "https://github.com/kylegundersen/DOMinationJS#readme"
 }

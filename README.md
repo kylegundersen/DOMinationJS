@@ -1,10 +1,10 @@
 
 
-# DOMinateJS ![Build](https://img.shields.io/github/package-json/v/kylegundersen/DOMinateJS/main?label=Stable%20Version) ![coverage](https://img.shields.io/badge/coverage-100%25-green)
+# DOMinationJS ![Build](https://img.shields.io/github/package-json/v/kylegundersen/DOMinationJS/main?label=Stable%20Version) ![coverage](https://img.shields.io/badge/coverage-100%25-green)
 
-This library wasn't created to reimagine a javscript world without the need for complicated and messy frameworks. That being said.. JS frameworks are a paragon of bloat, bugs, performance, and integration issues. This library follows a simple methodology, apply the DRY principle to reduce the amount of code needed to interact with the DOM. This isn't meant to be a fully flushed out framework, just a helper library that helps you DOMinate Javascipt.
+This library wasn't created to reimagine a javscript world without the need for complicated and messy frameworks. That being said.. JS frameworks are a paragon of bloat, bugs, performance, and integration issues. This library follows a simple methodology, apply the DRY principle to reduce the amount of code needed to interact with the DOM. This isn't meant to be a fully flushed out framework, just a helper library that helps you with Javascipt DOMination.
 
-Here is an example of how DOMinateJS reduces the code in your application. Less is always more!
+Here is an example of how DOMinationJS reduces the code in your application. Less is always more!
 
 #### Code Sample:
 ```javascript
@@ -16,7 +16,7 @@ newElement.id = 'guid';
 newElement.textContent = 'button name';
 newElement.addEventListener('click', () => console.log('clicked'));
 
-// The DOMinateJS way
+// The DOMinationJS way
 let newElement = DOM.create("div", { class: "class-1 class-2", id:'guid', text: 'button name' }, { click : () => console.log('clicked') });
 ```
 &nbsp;
@@ -25,7 +25,7 @@ let newElement = DOM.create("div", { class: "class-1 class-2", id:'guid', text: 
 
 You can install via NPM or download from GitHub.
 ```
-npm i @kylegundersen/dominatejs
+npm i dominationjs
 ```
 
 &nbsp;
@@ -36,7 +36,7 @@ Once installed. Then just import the package into your project. This was written
 
 ```javascript
 
-import { DOM } from 'dominatejs';
+import { DOM } from 'dominationJS';
 
 ```
 
