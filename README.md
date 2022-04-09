@@ -2,10 +2,9 @@
 
 # DOMinationJS ![Build](https://img.shields.io/github/package-json/v/kylegundersen/DOMinationJS/main?label=Stable%20Version) ![coverage](https://img.shields.io/badge/coverage-100%25-green)
 
-This library wasn't created to reimagine a javscript world without the need for complicated and messy frameworks. That being said.. JS frameworks are a paragon of bloat, bugs, performance, and integration issues. This library follows a simple methodology, apply the DRY principle to reduce the amount of code needed to interact with the DOM. This isn't meant to be a fully flushed out framework, just a helper library that helps you with Javascipt DOMination.
+JS frameworks are a paragon of bloat, bugs, performance, and integration issues. Although there are reasons to use a framework, they offer little value to anyone with a working knowledge of javascript. This library follows a simple methodology; less is more. We use the DRY principle and other patterns to reduce the amount of code needed to interact with the DOM. A lightweight purpose-driven library for complete Javascript DOMination.
 
-Here is an example of how DOMinationJS reduces the code in your application. Less is always more!
-
+Here is an example of how DOMinationJS reduces the code in your application.
 #### Code Sample:
 ```javascript
 // Standard way to create an element in vanilla JS
@@ -25,7 +24,7 @@ let newElement = DOM.create("div", { class: "class-1 class-2", id:'guid', text: 
 
 You can install via NPM or download from GitHub.
 ```
-npm i dominationjs
+npm i domination-js
 ```
 
 &nbsp;
@@ -36,7 +35,7 @@ Once installed. Then just import the package into your project. This was written
 
 ```javascript
 
-import { DOM } from 'dominationJS';
+import { DOM } from 'domination-js';
 
 ```
 
@@ -44,14 +43,13 @@ import { DOM } from 'dominationJS';
 
 # DOM API
 
-The DOM module is used for reducing the amount of boiler plate needed for working with the document object model. This is meant to be used along side existing DOM functions, it should not and is not mean't to replace everything.
-
+The DOM module reduces the amount of boilerplate needed for working with the document object model. The goal is to use this alongside existing DOM functions; it should not and will not replace everything.
 
 ### **addEventDelegate**
 Adds a global event listener that can monitor changes and perform events.
 * @param type - Event type, example: click, dblclick, mouseover, ect..
 * @param selector - Same as query selector. Element class denoted with period, id denoted with #, or element name.
-* @param callback - A callback function to perfom when the event is triggered.
+* @param callback - A callback function to perform when the event is triggered.
 * @param useCapture - Optionally use capture instead of event bubbling.
 * @param parent - Optionally where to add the listener. Defaults to the document.
 #### Code Sample:
@@ -71,18 +69,20 @@ DOM.addEventDelegate('click', "button", () => { console.log("FIRE!") }, true, wi
 Create a complex DOM element with a single funciton.
 * @param element - Standard HTML element. Example: div, span, input, button, ect...
 * @param attributes - Pass an object using this pattern. **{ attributeName : value }**. 
-* - ```text``` Can pass a string to textContent or append an Element/node.
-* - ```class``` Can pass multiple classes which are delimited by spaces.
-* @param events - Pass an object using this pattern. **{ [HTML DOM Event Type]: (callback Function) }**. The eventType consists of standard javascript events.
-* @returns An element Inferred from the ```element``` param.
+* ```text``` You are able to pass a string as textContent or pass an Element/node to append.
+* ```class``` You are able to pass multiple classes using a space as the delimiter.
+* @param events - Optionally pass an object using this pattern to add events. **{ eventType: callback }**. The eventType consists of standard javascript events.
+* @returns The new created inferred from the ```element``` param.
 #### Code Sample:
 ```javascript
-// Example 1
-let newElement = DOM.create("div", ["text-class"], { id: "unique-id" }, "Some call to action text!");
+// Example 1 - <div id="unique-id" class="text-class"> Some call to action text! </div>
+let newElement = DOM.create("div", { id: "unique-id", class: "text-class", text: "Some call to action text!"});
 
-// Example 2
-let newEvent = () => { console.log("clicked!") };
-DOM.create("button", ["button-class"], { id: "unique-id-2" }, newElement, {click: newEvent});
+// Example 2 - When clicked it prints out "Clicked!" to the console.
+// <button id="unique-id-2" class="button-class">
+//  <div id="unique-id" class="text-class"> Some call to action text! </div>
+// </button>
+DOM.create("button", { id: "unique-id-2", class: "button-class", text: newElement}, { click: () => console.log('Clicked!') });
 ```
 
 ### **select**

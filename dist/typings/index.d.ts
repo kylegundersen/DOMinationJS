@@ -9,7 +9,7 @@ export declare class DOM {
      * Adds a global event listener that can monitor changes and perform events
      * @param type - Event type, example: click, dblclick, mouseover, ect..
      * @param selector - Same as query selector. Element class denoted with period, id denoted with #, or element name.
-     * @param callback - A callback function to perfom when the event is triggered.
+     * @param callback - A callback function to perform when the event is triggered.
      * @param useCapture - Optionally use capture instead of event bubbling.
      * @param parent - Optionally where to add the listener. Defaults to the document.
      *
@@ -32,18 +32,20 @@ export declare class DOM {
      * Create a complex DOM element with a single funciton.
      * @param element - Standard HTML element. Example: div, span, input, button, ect...
      * @param attributes - Pass an object using this pattern. **{ attributeName : value }**.
-     * - ```text``` Can pass a string to textContent or append an Element/node.
-     * - ```class``` Can pass multiple classes which are delimited by spaces.
-     * @param events - Pass an object using this pattern. **{ [HTML DOM Event Type]: (callback Function) }**. The eventType consists of standard javascript events.
-     * @returns An element Inferred from the ```element``` param.
+     * - ```text``` You are able to pass a string as textContent or pass an Element/node to append.
+     * - ```class``` You are able to pass multiple classes using a space as the delimiter.
+     * @param events - Optionally pass an object using this pattern to add events. **{ eventType: callback }**. The eventType consists of standard javascript events.
+     * @returns The new created element inferred from the ```element``` param.
      * ```javascript
      *
-     * // Example 1
-     * let newElement = DOM.create("div", ["text-class"], { id: "unique-id" }, "Some call to action text!");
+     * // Example 1 - <div id="unique-id" class="text-class"> Some call to action text! </div>
+     * let newElement = DOM.create("div", { id: "unique-id", class: "text-class", text: "Some call to action text!"});
      *
-     * // Example 2
-     * let newEvent = () => { console.log("clicked!") };
-     * DOM.create("button", ["button-class"], { id: "unique-id-2" }, newElement, {click: newEvent});
+     * // Example 2 - When clicked it prints out "Clicked!" to the console.
+     * // <button id="unique-id-2" class="button-class">
+     * //  <div id="unique-id" class="text-class"> Some call to action text! </div>
+     * // </button>
+     * DOM.create("button", { id: "unique-id-2", class: "button-class", text: newElement}, { click: () => console.log('Clicked!') });
      *
      *
      * ```
