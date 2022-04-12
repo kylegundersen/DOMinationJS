@@ -29,8 +29,8 @@ export class DOM {
      * 
      * ```
      */
-    public static addEventDelegate( type : any, selector : string, callback : Function, useCapture : boolean = false, parent: any = document) {
-        parent.addEventListener( type,
+    public static addEventDelegate(type: any, selector: string, callback: Function, useCapture: boolean = false, parent: any = document) {
+        parent.addEventListener(type,
             e => {
                 if (e.target.matches(selector)) callback(e)
             },
@@ -60,37 +60,37 @@ export class DOM {
      *
      * ```
      */
-    public static create(element: string, attributes: any = null, events: jsEvents = null) : any {
+    public static create(element: string, attributes: any = null, events: jsEvents = null): any {
 
         let elem = document.createElement(element);
 
         if (attributes !== null) {
             Object.keys(attributes).forEach(attributeName => {
 
-                switch(attributeName){
-                    case "class" : 
-                        (attributes[attributeName].trim().split(/\s+/)).forEach( attrClass => { elem.classList.add(attrClass) });
-                    break;
-                    case "text" : 
-                    if(typeof attributes[attributeName] === "string") { 
-                        elem.textContent = attributes[attributeName]; 
-                    } else {
-                        elem.append(attributes[attributeName]);
-                    }
-                    break;
-                    case "dataset" :
+                switch (attributeName) {
+                    case "class":
+                        (attributes[attributeName].trim().split(/\s+/)).forEach(attrClass => { elem.classList.add(attrClass) });
+                        break;
+                    case "text":
+                        if (typeof attributes[attributeName] === "string") {
+                            elem.textContent = attributes[attributeName];
+                        } else {
+                            elem.append(attributes[attributeName]);
+                        }
+                        break;
+                    case "dataset":
                         Object.entries(attributes[attributeName]).forEach(([dataKey, dataValue]) => {
                             elem.dataset[dataKey] = dataValue as string;
-                        })                          
-                    break;
-                    default : elem.setAttribute(attributeName, attributes[attributeName]);
+                        })
+                        break;
+                    default: elem.setAttribute(attributeName, attributes[attributeName]);
                 }
 
             });
         }
 
         if (events !== null) {
-            let eventList : Array<string> = Object.keys(events);
+            let eventList: Array<string> = Object.keys(events);
             eventList.forEach(event => elem.addEventListener(event, events[event]));
         }
 
@@ -103,7 +103,7 @@ export class DOM {
      * @param element - Defaults to the document object
      * @return The first or only element
      */
-    public static select(query: string, parent : any = document): Element {
+    public static select(query: string, parent: any = document): Element {
         return parent.querySelector(query);
     }
 
@@ -113,18 +113,45 @@ export class DOM {
      * @param element - Defaults to the document object
      * @return An array of elements
      */
-    public static selectAll(query: string, parent : any = document): Array<Element> {
+    public static selectAll(query: string, parent: any = document): Array<Element> {
         return Array.prototype.slice.call(parent.querySelectorAll(query));
     }
 
     /**
      * Detach and return an Element from the DOM
-     * @param referemce A query selector string or elem reference (Element, ect...)
+     * @param reference A query selector string or elem reference (Element, ect...)
      * @return The detached element
      */
-    public static detach(referemce: string | Element): Element {
-        let elem: Element = typeof referemce === "string" ? this.select(referemce) : referemce;
+    public static detach(reference: string | Element): Element {
+        let elem: Element = typeof reference === "string" ? this.select(reference) : reference;
         return elem.parentElement.removeChild(elem);
+    }
+
+    /**
+     * Two-way data binding between an object's property and an Element's attribute.
+     * @param object - The parent object where the property will be added.
+     * @param objectProperty - Create a property that binds with an attribute.
+     * @param element - The element or query selector of the element.
+     * @param elementAttribute - The attribute to bind to the object's property.
+     * ```javascript
+     * 
+     * // Example - Binds Object Property "name" (dataObject.name) to an element's attribute value. 
+     * let dataObject = {};
+     * DOM.bindAttribute(dataObject, "name", "#unique-id", 'value');
+     *
+     *
+     * ```
+     */
+    public static bindAttribute(object: any, objectProperty: string, element: Element | string, elementAttribute: string): void {
+        let elem: Element = typeof element === "string" ? this.select(element) : element;
+        Object.defineProperty(object, objectProperty, {
+            get() {
+                return elem.getAttribute(elementAttribute);
+            },
+            set(value) {
+                elem.setAttribute(elementAttribute, value);
+            }
+        })
     }
 
 }

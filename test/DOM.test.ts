@@ -79,3 +79,24 @@ test("Select All elements.", () => {
     expect(getElements.length).toBe(3);
     expect(getElements[0].classList[0]).toBe("text-class");
 }); 
+
+test("Two-way data binding with an HTML attribute using reference.", () => {
+    let element : HTMLInputElement = DOM.create("input");
+    let dataObject : any = {};
+    DOM.bindAttribute(dataObject, "name", element, 'value');
+    element.setAttribute("value", "test");
+    expect(dataObject.name).toBe("test");
+    dataObject.name = "test other way";
+    expect(element.value).toBe("test other way");
+});
+    
+test("Two-way data binding with an HTML attribute using selector.", () => {
+    let element2 : HTMLInputElement = DOM.create("input", { id: "unique-id" });
+    let dataObject : any = {};
+    document.body.append(element2);
+    DOM.bindAttribute(dataObject, "dataCustom", "#unique-id", 'data-custom');
+    element2.setAttribute("data-custom", "test");
+    expect(dataObject.dataCustom).toBe("test");
+    dataObject.dataCustom = "test other way";
+    expect(element2.getAttribute('data-custom')).toBe("test other way");
+});

@@ -107,15 +107,15 @@ Shorthand for the query selector all with the added bonus of returning an array.
 #### Code Sample:
 ```javascript
 // Example 1 - Gets an array of all div elements in document
-let newElement = DOM.selectAll("div");
+let newElements = DOM.selectAll("div");
 
 // Example 2 - Gets an array of all .someClass inside containerElement
-let newElement = DOM.selectAll(".someClass", containerElement);
+let newElements = DOM.selectAll(".someClass", containerElement);
 ```
 
 ### **detach**
 Detach and return an Element from the DOM without destroying it.
-* @param referemce A query selector string or elem reference (Element, ect...)
+* @param reference A query selector string or elem reference (Element, ect...)
 * @return The detached element
 #### Code Sample:
 ```javascript
@@ -124,4 +124,17 @@ DOM.detach(".someClass");
 
 // Example 2 - Detach using a reference
 DOM.detach(elementReference);
+```
+
+### **bindAttribute**
+Two-way data binding between an object's property and an Element's attribute.
+* @param object - The parent object where the property will be added.
+* @param objectProperty - Create a property that binds with an attribute.
+* @param element - The element or query selector of the element.
+* @param elementAttribute - The attribute to bind to the object's property.
+#### Code Sample:
+```javascript
+// Example - Binds Object Property "name" (dataObject.name) to an element's attribute value. 
+let dataObject = {};
+DOM.bindAttribute(dataObject, "name", "#unique-id", 'value');
 ```
