@@ -1,4 +1,5 @@
-import { jsEvents } from "./models/js-events";
+import { JSEvents } from "./models/js-events";
+import { JSEventsEnum } from "./enum/js-events";
 /**
  * Document Object Model - helper functions
  * Helps you interact with the DOM safely and easily.
@@ -6,7 +7,9 @@ import { jsEvents } from "./models/js-events";
  */
 export declare class DOM {
     /**
-     * Adds a global event listener that can monitor changes and perform events
+     * Adds an event listener that follows the event delegation pattern. The advantage is that you can add
+     * elements at any depth inside the parent container without having to worry about the event being
+     * applied. This solves having to add, remove, and manage events per element.
      * @param type - Event type, example: click, dblclick, mouseover, ect..
      * @param selector - Same as query selector. Element class denoted with period, id denoted with #, or element name.
      * @param callback - A callback function to perform when the event is triggered.
@@ -27,7 +30,7 @@ export declare class DOM {
      *
      * ```
      */
-    static addEventDelegate(type: any, selector: string, callback: Function, useCapture?: boolean, parent?: any): void;
+    static addEventDelegate(type: JSEventsEnum | string, selector: string, callback: Function, useCapture?: boolean, parent?: any): void;
     /**
      * Create a complex DOM element with a single funciton.
      * @param element - Standard HTML element. Example: div, span, input, button, ect...
@@ -50,7 +53,7 @@ export declare class DOM {
      *
      * ```
      */
-    static create(element: string, attributes?: any, events?: jsEvents): any;
+    static create(element: string, attributes?: any, events?: JSEvents): any;
     /**
      * Shorthand for the query selector
      * @param query - A query selector string, Example: ```".class"```
@@ -67,8 +70,58 @@ export declare class DOM {
     static selectAll(query: string, parent?: any): Array<Element>;
     /**
      * Detach and return an Element from the DOM
-     * @param referemce A query selector string or elem reference (Element, ect...)
+     * @param reference A query selector string or elem reference (Element, ect...)
      * @return The detached element
      */
-    static detach(referemce: string | Element): Element;
+    static detach(reference: string | Element): Element;
+    /**
+     * Two-way data binding between an object's property and an Element's attribute.
+     * @param object - The parent object where the property will be added.
+     * @param objectProperty - Create a property that binds with an attribute.
+     * @param element - The element or query selector of the element.
+     * @param elementAttribute - The attribute to bind to the object's property.
+     * ```javascript
+     *
+     * // Example - Binds Object Property "name" (dataObject.name) to an element's attribute value.
+     * let dataObject = {};
+     * DOM.bindAttribute(dataObject, "name", "#unique-id", 'value');
+     *
+     *
+     * ```
+     */
+    static bindAttribute(object: any, objectProperty: string, element: Element | string, elementAttribute: string): void;
+    /**
+     * Get a route based on current path. This is great for making a SPA with deep-linking.
+     * @param isArray - This will return the path as an array ```['some', 'path', 'defined']```
+     * otherwise it will default to a string ```'/some/path/defined'```.
+     * @return - A string or array representing the current document.location.pathName
+     *
+     * ```javascript
+     *
+     * // Example 1 - Get path `/some/path/defined`
+     * let currentRoute = DOM.getRoute();
+     *
+     * // Example 2 - Get path as array ['some', 'path', 'defined']
+     * let currentRoute = DOM.getRoute(true);
+     *
+     * ```
+     */
+    static getRoute(isArray?: boolean): Array<string> | string;
+    /**
+     * Set a route based on path. This is great for making a SPA with deep-linking.
+     * @param route - The path you want to navigate without refreshing the view.
+     *
+     * ```javascript
+     *
+     * // Example 1 - Set url localhost:4200/some/path/defined
+     * DOM.setRoute('/some/path/defined');
+     *
+     * // Example 2 - Gets current route as array ['some', 'path', 'defined']
+     * //             Sets new route localhost:4200/some/path/new
+     * let currentRoute = DOM.getRoute(true);
+     * DOM.setRoute(`/${currentRoute[0]}/${currentRoute[1]}/new`);
+     *
+     * ```
+     */
+    static setRoute(route: any): void;
 }

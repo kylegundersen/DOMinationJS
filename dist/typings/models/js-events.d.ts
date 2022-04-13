@@ -1,4 +1,4 @@
-export interface jsEvents {
+export interface JSEvents {
     abort?: Function;
     afterprint?: Function;
     animationend?: Function;

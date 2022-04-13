@@ -46,7 +46,7 @@ import { DOM } from 'domination-js';
 The DOM module reduces the amount of boilerplate needed for working with the document object model. The goal is to use this alongside existing DOM functions; it should not and will not replace everything.
 
 ### **addEventDelegate**
-Adds a global event listener that can monitor changes and perform events.
+Adds an event listener that follows the event delegation pattern. The advantage is that you can add elements at any depth inside the parent container without having to worry about the event being applied. This solves having to add, remove, and manage events per element.
 * @param type - Event type, example: click, dblclick, mouseover, ect..
 * @param selector - Same as query selector. Element class denoted with period, id denoted with #, or element name.
 * @param callback - A callback function to perform when the event is triggered.
@@ -137,4 +137,35 @@ Two-way data binding between an object's property and an Element's attribute.
 // Example - Binds Object Property "name" (dataObject.name) to an element's attribute value. 
 let dataObject = {};
 DOM.bindAttribute(dataObject, "name", "#unique-id", 'value');
+```
+
+### **getRoute**
+Get a route based on current path. This is great for making a SPA with deep-linking. 
+* @param isArray - This will return the path as an array ```['some', 'path', 'defined']``` otherwise it will default to a string ```'/some/path/defined'```.
+* @return - A string or array representing the current document.location.pathName
+#### Code Sample:
+```javascript
+
+// Example 1 - Get path `/some/path/defined`
+let currentRoute = DOM.getRoute();
+
+// Example 2 - Get path as array ['some', 'path', 'defined']
+let currentRoute = DOM.getRoute(true);
+
+```
+
+### **setRoute**
+Set a route based on path. This is great for making a SPA with deep-linking. 
+* @param route - The path you want to navigate without refreshing the view.
+#### Code Sample:
+```javascript
+ 
+// Example 1 - Set url localhost:4200/some/path/defined
+DOM.setRoute('/some/path/defined');
+
+// Example 2 - Gets current route as array ['some', 'path', 'defined']
+//             Sets new route localhost:4200/some/path/new
+let currentRoute = DOM.getRoute(true);
+ DOM.setRoute(`/${currentRoute[0]}/${currentRoute[1]}/new`);
+
 ```

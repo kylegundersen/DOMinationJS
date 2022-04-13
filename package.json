@@ -1,6 +1,6 @@
 {
   "name": "domination-js",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "kylegundersen",
   "description": "A simple DOM helper that will change the way you feel about JavaScript frameworks forever.",
   "main": "dist/index.js",

@@ -1,4 +1,5 @@
 import { DOM } from '../src/index';
+import { JSEventsEnum } from '../src/enum/js-events';
 
 beforeEach(() => {
     return document.body.innerHTML = "";
@@ -6,7 +7,7 @@ beforeEach(() => {
 
 test("Add event delegate to the page.", () => {
     var eventToggle = 0;
-    DOM.addEventDelegate('click', "#unique-id", () => { eventToggle += 1 });
+    DOM.addEventDelegate(JSEventsEnum.click, "#unique-id", () => { eventToggle += 1 });
     let domElement : Element = DOM.create("button", { id: "unique-id", class: "button" } );
     document.body.append(domElement);
     let getElementByID = document.getElementById('unique-id');
@@ -99,4 +100,25 @@ test("Two-way data binding with an HTML attribute using selector.", () => {
     expect(dataObject.dataCustom).toBe("test");
     dataObject.dataCustom = "test other way";
     expect(element2.getAttribute('data-custom')).toBe("test other way");
+});
+
+test("Get a DOM route as a string.", () => {
+    let path = '/test/path';
+    window.history.pushState({}, "", path);
+    let currentRoute = DOM.getRoute();
+    expect(currentRoute).toBe(path);
+});
+
+test("Get a DOM route as an array.", () => {
+    let path = '/test/path';
+    window.history.pushState({}, "", path);
+    let currentRoute = DOM.getRoute(true);
+    expect(currentRoute[0]).toBe('test');
+    expect(currentRoute[1]).toBe('path');
+});
+
+test("Get a DOM route.", () => {
+    let path = '/test/path';
+    DOM.setRoute(path);
+    expect(path).toBe(DOM.getRoute());
 });

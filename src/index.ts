@@ -1,5 +1,5 @@
-import { jsEvents } from "./models/js-events";
-
+import { JSEvents } from "./models/js-events";
+import { JSEventsEnum } from "./enum/js-events";
 /**
  * Document Object Model - helper functions
  * Helps you interact with the DOM safely and easily.
@@ -8,7 +8,9 @@ import { jsEvents } from "./models/js-events";
 export class DOM {
 
     /**
-     * Adds a global event listener that can monitor changes and perform events
+     * Adds an event listener that follows the event delegation pattern. The advantage is that you can add 
+     * elements at any depth inside the parent container without having to worry about the event being 
+     * applied. This solves having to add, remove, and manage events per element.
      * @param type - Event type, example: click, dblclick, mouseover, ect..
      * @param selector - Same as query selector. Element class denoted with period, id denoted with #, or element name.
      * @param callback - A callback function to perform when the event is triggered.
@@ -29,7 +31,7 @@ export class DOM {
      * 
      * ```
      */
-    public static addEventDelegate(type: any, selector: string, callback: Function, useCapture: boolean = false, parent: any = document) {
+    public static addEventDelegate(type: JSEventsEnum | string, selector: string, callback: Function, useCapture: boolean = false, parent: any = document) {
         parent.addEventListener(type,
             e => {
                 if (e.target.matches(selector)) callback(e)
@@ -60,7 +62,7 @@ export class DOM {
      *
      * ```
      */
-    public static create(element: string, attributes: any = null, events: jsEvents = null): any {
+    public static create(element: string, attributes: any = null, events: JSEvents = null): any {
 
         let elem = document.createElement(element);
 
@@ -154,4 +156,45 @@ export class DOM {
         })
     }
 
+    /**
+     * Get a route based on current path. This is great for making a SPA with deep-linking. 
+     * @param isArray - This will return the path as an array ```['some', 'path', 'defined']``` 
+     * otherwise it will default to a string ```'/some/path/defined'```.
+     * @return - A string or array representing the current document.location.pathName
+     * 
+     * ```javascript
+     * 
+     * // Example 1 - Get path `/some/path/defined`
+     * let currentRoute = DOM.getRoute();
+     * 
+     * // Example 2 - Get path as array ['some', 'path', 'defined']
+     * let currentRoute = DOM.getRoute(true);
+     * 
+     * ```
+     */
+    public static getRoute(isArray = false) : Array<string> | string {
+        return isArray ? document.location.pathname.split("/").filter(n => n) : document.location.pathname;
+    }
+
+    /**
+     * Set a route based on path. This is great for making a SPA with deep-linking. 
+     * @param route - The path you want to navigate without refreshing the view.
+     * 
+     * ```javascript
+     * 
+     * // Example 1 - Set url localhost:4200/some/path/defined
+     * DOM.setRoute('/some/path/defined');
+     * 
+     * // Example 2 - Gets current route as array ['some', 'path', 'defined']
+     * //             Sets new route localhost:4200/some/path/new
+     * let currentRoute = DOM.getRoute(true);
+     * DOM.setRoute(`/${currentRoute[0]}/${currentRoute[1]}/new`);
+     * 
+     * ```
+     */
+    public static setRoute(route) : void {
+        window.history.pushState({}, "", route);
+    }
+
 }
+
