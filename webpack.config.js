@@ -8,7 +8,7 @@ module.exports = {
       main: "./src/index.ts",
    },
    output: {
-      path: path.resolve(__dirname, './dist'),
+      path: path.resolve(__dirname, './dist/umd'),
       filename: "index.js", // <--- Will be compiled to this single file
       libraryTarget: 'umd',
       clean: true

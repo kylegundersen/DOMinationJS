@@ -4,6 +4,8 @@
 
 JS frameworks are a paragon of bloat, bugs, performance, and integration issues. Although there are reasons to use a framework, they offer little value to anyone with a working knowledge of javascript. This library follows a simple methodology; less is more. We use the DRY principle and other patterns to reduce the amount of code needed to interact with the DOM. A lightweight purpose-driven library for complete Javascript DOMination.
 
+#### **Check out the [DOMinationJS Samples](https://github.com/kylegundersen/DOMinationJS-Samples) to get started fast.**
+
 Here is an example of how DOMinationJS reduces the code in your application.
 #### Code Sample:
 ```javascript

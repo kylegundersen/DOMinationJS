@@ -1,15 +1,14 @@
 {
   "name": "domination-js",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "author": "kylegundersen",
   "description": "A simple DOM helper that will change the way you feel about JavaScript frameworks forever.",
-  "main": "dist/index.js",
+  "main": "dist/esm/index.js",
   "scripts": {
     "init": "npm install",
     "audit-fix": "npm audit fix",
-    "build": "webpack",
+    "build": "webpack & tsc",
     "watch": "npx webpack - w",
-    "serve-example": "node example/server.js",
     "test": "jest",
     "test-watch": "jest --watch",
     "test-coverage": "jest --coverage",
@@ -40,10 +39,11 @@
     "vanilla",
     "TypeScript",
     "UMD",
-    "AMD",
+    "ESM",
     "simple",
     "lightweight",
-    "minimal"
+    "minimal",
+    "SPA"
   ],
   "license": "MIT",
   "bugs": {

@@ -1,12 +1,10 @@
 {
     "compilerOptions": {
-        "moduleResolution": "classic",
-        "target": "es5",
-        "module": "es2015",
+        "moduleResolution": "node",
+        "target": "ESNext",
+        "module": "ESNext",
         "lib": [
-            "es2015",
-            "es2016",
-            "es2017",
+            "ESNext",
             "dom"
         ],
         "strict": false,
@@ -16,7 +14,7 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "declarationDir": "dist/typings",
-        "outDir": "dist",
+        "outDir": "dist/esm/",
         "typeRoots": [
             "node_modules/@types"
         ]
