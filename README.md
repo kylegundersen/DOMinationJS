@@ -153,12 +153,25 @@ let currentRoute = DOM.getRoute();
 
 // Example 2 - Get path as array ['some', 'path', 'defined']
 let currentRoute = DOM.getRoute(true);
+```
 
+### **getRouteData**
+Get the routes query string as a string or an object
+* @param isObject - (Optional) Defaults to true and will return an object by default.
+* @return - A string or object representing the current document.location.search
+#### Code Sample:
+```javascript
+ 
+// Example 1 - Get query string as object ```{ test : 1 }```
+let currentRoute = DOM.getRouteData();
+
+// Example 2 - Get query string as string ```"?test=1"```
+let currentRoute = DOM.getRouteData(false);
 ```
 
 ### **setRoute**
-Set a route based on path. This is great for making a SPA with deep-linking. 
-* @param route - The path you want to navigate without refreshing the view.
+Set the browser url and update browser history without triggering a full page refresh. 
+* @param route - The full url, path, or add query string.
 #### Code Sample:
 ```javascript
  
@@ -169,5 +182,4 @@ DOM.setRoute('/some/path/defined');
 //             Sets new route localhost:4200/some/path/new
 let currentRoute = DOM.getRoute(true);
  DOM.setRoute(`/${currentRoute[0]}/${currentRoute[1]}/new`);
-
 ```

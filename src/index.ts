@@ -33,7 +33,7 @@ export class DOM {
      */
     public static addEventDelegate(type: JSEventsEnum | string, selector: string, callback: Function, useCapture: boolean = false, parent: any = document) {
         parent.addEventListener(type,
-            e => {
+            (e) => {
                 if (e.target.matches(selector)) callback(e)
             },
             useCapture
@@ -172,13 +172,32 @@ export class DOM {
      * 
      * ```
      */
-    public static getRoute(isArray = false) : Array<string> | string {
+    public static getRoute(isArray:boolean = false) : Array<string> | string {
         return isArray ? document.location.pathname.split("/").filter(n => n) : document.location.pathname;
     }
 
     /**
-     * Set a route based on path. This is great for making a SPA with deep-linking. 
-     * @param route - The path you want to navigate without refreshing the view.
+     * Get the routes query string as a string or an object
+     * @param isObject - (Optional) Defaults to true and will return an object by default.
+     * @return - A string or object representing the current document.location.search
+     * 
+     * ```javascript
+     * 
+     * // Example 1 - Get query string as object ```{ test : 1 }```
+     * let currentRoute = DOM.getRouteData();
+     * 
+     * // Example 2 - Get query string as string ```"?test=1"```
+     * let currentRoute = DOM.getRouteData(false);
+     * 
+     * ```
+     */
+    public static getRouteData(isObject:boolean = true) : any | string {
+        return isObject ? Object.fromEntries(new URLSearchParams(document.location.search) as any) : document.location.search;
+    }
+
+    /**
+     * Set the browser url and update browser history without triggering a full page refresh. 
+     * @param route - The path location with an optional query string
      * 
      * ```javascript
      * 

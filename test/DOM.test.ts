@@ -117,6 +117,20 @@ test("Get a DOM route as an array.", () => {
     expect(currentRoute[1]).toBe('path');
 });
 
+test("Get a DOM query string as an object.", () => {
+    let qs = '?test=1';
+    window.history.pushState({}, "", qs);
+    let data = DOM.getRouteData();
+    expect(data.test).toBe("1");
+});
+
+test("Get a DOM query string as a string.", () => {
+    let qs = '?test=1';
+    window.history.pushState({}, "", qs);
+    let data = DOM.getRouteData(false);
+    expect(data).toBe('?test=1');
+});
+
 test("Get a DOM route.", () => {
     let path = '/test/path';
     DOM.setRoute(path);
