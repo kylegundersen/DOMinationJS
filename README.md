@@ -70,11 +70,13 @@ DOM.addEventDelegate('click', "button", () => { console.log("FIRE!") }, true, wi
 ### **create**
 Create a complex DOM element with a single funciton.
 * @param element - Standard HTML element. Example: div, span, input, button, ect...
-* @param attributes - Pass an object using this pattern. **{ attributeName : value }**. 
-* ```text``` You are able to pass a string as textContent or pass an Element/node to append.
-* ```class``` You are able to pass multiple classes using a space as the delimiter.
-* @param events - Optionally pass an object using this pattern to add events. **{ eventType: callback }**. The eventType consists of standard javascript events.
-* @returns The new created inferred from the ```element``` param.
+* @param attributes - (Optional) Pass an object using this pattern. **{ attributeName : value }**. 
+    - ```text``` You are able to pass a string as textContent.
+    - ```append``` Pass an element/node, or an array of elements/nodes to append.
+    - ```html``` You are able to pass a string as HTML. **Do not pass user changable data for obvious security reasons!**
+    - ```class``` You are able to pass multiple classes using a space as the delimiter.
+* @param events - (Optional) Pass an object using this pattern to add events. **{ eventType: callback }**. The eventType consists of standard javascript events.
+* @returns The new created element inferred from the ```element``` param.
 #### Code Sample:
 ```javascript
 // Example 1 - <div id="unique-id" class="text-class"> Some call to action text! </div>
@@ -90,7 +92,7 @@ DOM.create("button", { id: "unique-id-2", class: "button-class", text: newElemen
 ### **select**
 Shorthand for the query selector
 * @param query - A query selector string, Example: ```".class"```
-* @param element - Defaults to the document object
+* @param element - (Optional) Defaults to the document object
 * @return The first or only element
 #### Code Sample:
 ```javascript
@@ -104,7 +106,7 @@ let newElement = DOM.select(".someClass", containerElement);
 ### **selectAll**
 Shorthand for the query selector all with the added bonus of returning an array.
 * @param query - A query selector string, Example: ```".class"```
-* @param element - Defaults to the document object
+* @param element - (Optional) Defaults to the document object
 * @return An array of elements
 #### Code Sample:
 ```javascript
@@ -142,8 +144,8 @@ DOM.bindAttribute(dataObject, "name", "#unique-id", 'value');
 ```
 
 ### **getRoute**
-Get a route based on current path. This is great for making a SPA with deep-linking. 
-* @param isArray - This will return the path as an array ```['some', 'path', 'defined']``` otherwise it will default to a string ```'/some/path/defined'```.
+Get a route based on current location path name.
+* @param isArray - (Optional) This will return the path as an array ```['some', 'path', 'defined']``` otherwise it will default to a string ```'/some/path/defined'```.
 * @return - A string or array representing the current document.location.pathName
 #### Code Sample:
 ```javascript

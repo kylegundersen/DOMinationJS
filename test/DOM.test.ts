@@ -26,13 +26,24 @@ test("Created element with a string.", () => {
     expect(getElementByID.innerHTML).toBe("Test Content");
 });
 
-test("Created element with a node.", () => {
+test("Created element with a node and element.", () => {
     let domInnerElement : Element = DOM.create("p");
     domInnerElement.append(document.createTextNode("Test Content"));
-    let domElement : Element = DOM.create("div", { id: "unique-id", class: "text-class", text: domInnerElement });
+    let domElement : Element = DOM.create("div", { id: "unique-id", class: "text-class", append: domInnerElement });
     document.body.append(domElement);
     let getElementByID = document.getElementById('unique-id');
     expect(getElementByID.children[0].innerHTML).toBe("Test Content");
+}); 
+
+test("Created element with multiple nodes/elements, include HTML rendering.", () => {
+    let domInnerElement1 : Element = DOM.create("p", { html : "<span>test</span>"});
+    let domInnerElement2 : Element = DOM.create("p", { append : "test"});
+    let domElement : Element = DOM.create("div", { id: "unique-id", class: "text-class", append: [domInnerElement1, domInnerElement2] });
+    console.log(domElement.children[0]);
+    document.body.append(domElement);
+    let getElementByID = document.getElementById('unique-id');
+    expect(getElementByID.children[0].innerHTML).toBe(`<span>test</span>`);
+    expect(getElementByID.children[1].innerHTML).toBe("test");
 }); 
 
 test("Create an input element.", () => {
