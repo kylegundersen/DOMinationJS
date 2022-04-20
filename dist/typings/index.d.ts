@@ -34,10 +34,12 @@ export declare class DOM {
     /**
      * Create a complex DOM element with a single funciton.
      * @param element - Standard HTML element. Example: div, span, input, button, ect...
-     * @param attributes - Pass an object using this pattern. **{ attributeName : value }**.
-     * - ```text``` You are able to pass a string as textContent or pass an Element/node to append.
+     * @param attributes - (Optional) Pass an object using this pattern. **{ attributeName : value }**.
+     * - ```text``` You are able to pass a string as textContent.
+     * - ```append``` Pass an element/node, or an array of elements/nodes to append.
+     * - ```html``` You are able to pass a string as HTML. **Do not pass user changable data for obvious security reasons!**
      * - ```class``` You are able to pass multiple classes using a space as the delimiter.
-     * @param events - Optionally pass an object using this pattern to add events. **{ eventType: callback }**. The eventType consists of standard javascript events.
+     * @param events - (Optional) Pass an object using this pattern to add events. **{ eventType: callback }**. The eventType consists of standard javascript events.
      * @returns The new created element inferred from the ```element``` param.
      * ```javascript
      *
@@ -57,14 +59,14 @@ export declare class DOM {
     /**
      * Shorthand for the query selector
      * @param query - A query selector string, Example: ```".class"```
-     * @param element - Defaults to the document object
+     * @param element - (Optional) Defaults to the document object
      * @return The first or only element
      */
     static select(query: string, parent?: any): Element;
     /**
      * Shorthand for the query selector all with the added bonus of returning an array.
      * @param query - A query selector string, Example: ```".class"```
-     * @param element - Defaults to the document object
+     * @param element - (Optional) Defaults to the document object
      * @return An array of elements
      */
     static selectAll(query: string, parent?: any): Array<Element>;
@@ -91,8 +93,8 @@ export declare class DOM {
      */
     static bindAttribute(object: any, objectProperty: string, element: Element | string, elementAttribute: string): void;
     /**
-     * Get a route based on current path. This is great for making a SPA with deep-linking.
-     * @param isArray - This will return the path as an array ```['some', 'path', 'defined']```
+     * Get a route based on current location path name.
+     * @param isArray - (Optional) This will return the path as an array ```['some', 'path', 'defined']```
      * otherwise it will default to a string ```'/some/path/defined'```.
      * @return - A string or array representing the current document.location.pathName
      *
