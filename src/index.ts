@@ -161,7 +161,17 @@ export class DOM {
                 return elementAttribute === "checked" ? elem[elementAttribute] : elem.getAttribute(elementAttribute);
             },
             set(value) {
-                elementAttribute === "checked" ? elem[elementAttribute] = Boolean(value) : elem.setAttribute(elementAttribute, value);
+                if(elementAttribute === "checked"){
+                    if(value == false){
+                        elem['checked'] = false; 
+                        elem.removeAttribute('checked');
+                    } else {
+                        elem['checked'] = true;
+                        elem.setAttribute('checked', '');
+                    }
+                } else {
+                elem.setAttribute(elementAttribute, value);
+                }
             }
         })
     }

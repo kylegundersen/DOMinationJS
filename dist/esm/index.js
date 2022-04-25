@@ -144,10 +144,22 @@ export class DOM {
         let elem = typeof element === "string" ? this.select(element) : element;
         Object.defineProperty(object, objectProperty, {
             get() {
-                return elem.getAttribute(elementAttribute);
+                return elementAttribute === "checked" ? elem[elementAttribute] : elem.getAttribute(elementAttribute);
             },
             set(value) {
-                elem.setAttribute(elementAttribute, value);
+                if (elementAttribute === "checked") {
+                    if (value == false) {
+                        elem['checked'] = false;
+                        elem.removeAttribute('checked');
+                    }
+                    else {
+                        elem['checked'] = true;
+                        elem.setAttribute('checked', '');
+                    }
+                }
+                else {
+                    elem.setAttribute(elementAttribute, value);
+                }
             }
         });
     }

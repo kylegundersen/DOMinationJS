@@ -106,8 +106,13 @@ test("Two-way data binding with an HTML checked attribute using reference.", () 
     let element : HTMLInputElement = DOM.create("input", { type: "checked" });
     let dataObject : any = {};
     DOM.bindAttribute(dataObject, "value", element, 'checked');
-    element.checked = true
+    dataObject.value = false;
+    element.checked = true;
     expect(dataObject.value).toBe(true);
+    element.checked = false;
+    dataObject.value = true;
+    console.log(element.outerHTML);
+    expect(element.checked).toBe(true);
     dataObject.value = false;
     expect(element.checked).toBe(false);
 });
