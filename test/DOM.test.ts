@@ -92,7 +92,7 @@ test("Select All elements.", () => {
     expect(getElements[0].classList[0]).toBe("text-class");
 }); 
 
-test("Two-way data binding with an HTML attribute using reference.", () => {
+test("Two-way data binding with an HTML value attribute using reference.", () => {
     let element : HTMLInputElement = DOM.create("input");
     let dataObject : any = {};
     DOM.bindAttribute(dataObject, "name", element, 'value');
@@ -100,6 +100,16 @@ test("Two-way data binding with an HTML attribute using reference.", () => {
     expect(dataObject.name).toBe("test");
     dataObject.name = "test other way";
     expect(element.value).toBe("test other way");
+});
+
+test("Two-way data binding with an HTML checked attribute using reference.", () => {
+    let element : HTMLInputElement = DOM.create("input", { type: "checked" });
+    let dataObject : any = {};
+    DOM.bindAttribute(dataObject, "value", element, 'checked');
+    element.checked = true
+    expect(dataObject.value).toBe(true);
+    dataObject.value = false;
+    expect(element.checked).toBe(false);
 });
     
 test("Two-way data binding with an HTML attribute using selector.", () => {

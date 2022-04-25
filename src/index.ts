@@ -158,10 +158,10 @@ export class DOM {
         let elem: Element = typeof element === "string" ? this.select(element) : element;
         Object.defineProperty(object, objectProperty, {
             get() {
-                return elem.getAttribute(elementAttribute);
+                return elementAttribute === "checked" ? elem[elementAttribute] : elem.getAttribute(elementAttribute);
             },
             set(value) {
-                elem.setAttribute(elementAttribute, value);
+                elementAttribute === "checked" ? elem[elementAttribute] = Boolean(value) : elem.setAttribute(elementAttribute, value);
             }
         })
     }
